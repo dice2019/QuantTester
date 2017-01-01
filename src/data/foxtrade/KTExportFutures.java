@@ -29,39 +29,38 @@ public class KTExportFutures extends AbstractKTExport implements ITickDataSource
 	}
 
 	protected String getSuffix(String instrument) {
-		final String instrumentLowerCase = instrument.toLowerCase();
 		for (String instr :SQ) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".SQ";
 			}
 		}
 		for (String instr :SY) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".SY";
 			}
 		}
 		for (String instr :DL) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".DL";
 			}
 		}
 		for (String instr :DY) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".DY";
 			}
 		}
 		for (String instr :ZZ) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".ZZ";
 			}
 		}
 		for (String instr :ZY) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".ZY";
 			}
 		}
 		for (String instr :ZJ) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return ".ZJ";
 			}
 		}

@@ -26,56 +26,55 @@ import data.struct.DetailedTick;
 import helper.MathHelper;
 
 public class SinYeeDataSource extends AbstractDataSource implements ITickDataSource {
-	
+
 	protected String getPrefix(String instrument) {
-		final String instrumentLowerCase = instrument.toLowerCase();
 		for (String instr :SQ) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "SQ_";
 			}
 		}
 		for (String instr :SY) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "SQ_";
 			}
 		}
 		for (String instr :DL) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "DL_";
 			}
 		}
 		for (String instr :DY) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "DL_";
 			}
 		}
 		for (String instr :ZZ) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "ZZ_";
 			}
 		}
 		for (String instr :ZY) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "ZZ_";
 			}
 		}
 		for (String instr :ZJ) {
-			if (instrumentLowerCase == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "ZJ_";
 			}
 		}
-		
-		final String[] SH = new String[] {"SH000001", "SH000016", "SH000300", "SH000905"};
-		final String[] SZ = new String[] {"SZ399001", "SZ399300", "SZ399905"};
-		
+
+		final String[] SH = {"SH000001", "SH000016", "SH000300", "SH000905"};
+		final String[] SZ = {"SZ399001", "SZ399300", "SZ399905"};
+
 		for (String instr : SH) {
-			if (instrument.toUpperCase() == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "SH_";
 			}
 		}
-		
+
 		for (String instr : SZ) {
-			if (instrument.toUpperCase() == instr) {
+			if (instrument.equalsIgnoreCase(instr)) {
 				return "SZ_";
 			}
 		}
