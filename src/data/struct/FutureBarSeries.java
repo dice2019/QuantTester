@@ -10,33 +10,33 @@ public final class FutureBarSeries extends BarSeries implements Iterable<Bar> {
 
 	public FutureBarSeries(List<? extends FutureBar> bars) {
 		super(bars);
-		
+
 		if (bars == null || bars.isEmpty()) {
 			openInterests = null;
 			contractMonths = null;
 			settlements = null;
 			return;
 		}
-		
+
 		this.openInterests = new float[array_size];
 
 		for (int i = 0; i < array_size; i++) {
-			this.openInterests[i] = (bars.get(i)).openInterest;
+			this.openInterests[i] = bars.get(i).openInterest;
 		}
 
-		if ((bars.get(0)).contractMonth > 0) {
+		if (bars.get(0).contractMonth > 0) {
 			this.contractMonths = new int[array_size];
 			for (int i = 0; i < array_size; i++) {
-				this.contractMonths[i] = (bars.get(i)).contractMonth;
+				this.contractMonths[i] = bars.get(i).contractMonth;
 			}
 		} else {
 			this.contractMonths = null;
 		}
 
-		if ((bars.get(0)).settlement > 0.0f) {
+		if (bars.get(0).settlement > 0.0f) {
 			this.settlements = new float[array_size];
 			for (int i = 0; i < array_size; i++) {
-				this.settlements[i] = (bars.get(i)).settlement;
+				this.settlements[i] = bars.get(i).settlement;
 			}
 		} else {
 			this.settlements = null;
