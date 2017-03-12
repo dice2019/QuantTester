@@ -35,7 +35,7 @@ public class AbstractKTExport extends AbstractDataSource {
 		return bars;
 	}
 
-	protected static List<FutureBar> ReadSTKDataEx(String single_file, boolean contain_settlement) {
+	protected static List<FutureBar> ReadSTKDataEx(String single_file) {
 		List<FutureBar> bars = null;
 		try (KTDataInputStream in = new KTDataInputStream(new FileInputStream(single_file))) {
 			in.readInt();	// File size
@@ -44,7 +44,7 @@ public class AbstractKTExport extends AbstractDataSource {
 			int num = in.readInt();
 			bars = new ArrayList<>(num);
 			while (in.available() >= unit_size) {
-				bars.add(in.readSTKDataEx(contain_settlement));
+				bars.add(in.readSTKDataEx(unit_size));
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Should print debug log

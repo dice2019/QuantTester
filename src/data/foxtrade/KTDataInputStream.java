@@ -31,7 +31,7 @@ class KTDataInputStream extends BufferedInputStream implements ILittleEndianData
 		return bar;
 	}
 
-	FutureBar readSTKDataEx(boolean contain_settlement) throws IOException {
+	FutureBar readSTKDataEx(int unit_size) throws IOException {
 		FutureBar bar = new FutureBar();
 		bar.time = readInt() + 8 * 3600;
 		bar.open = readFloat();
@@ -42,11 +42,7 @@ class KTDataInputStream extends BufferedInputStream implements ILittleEndianData
 		bar.openInterest = readFloat();
 		bar.contractMonth = readInt();
 		bar.amount = readFloat();
-		if (contain_settlement) {
-			bar.settlement = readFloat();
-		} else {
-			bar.settlement = 0.0f;
-		}
+		bar.settlement = readFloat();
 
 		return bar;
 	}

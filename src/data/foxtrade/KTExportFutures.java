@@ -140,8 +140,7 @@ public class KTExportFutures extends AbstractKTExport implements ITickDataSource
 					daily_tick_ohlcv.add(tickList);
 				}
 			} else {
-				boolean contain_settlement = time_frame.ordinal() >= TIME_FRAME.DAY.ordinal();
-				List<FutureBar> futureBarList = ReadSTKDataEx(single_file, contain_settlement);
+				List<FutureBar> futureBarList = ReadSTKDataEx(single_file);
 				if (futureBarList != null && !futureBarList.isEmpty()) {
 					FutureBarSeries futureBars = new FutureBarSeries(futureBarList);
 					futureBars.checkAndFixSettlement();	// 检查所有结算价, 如果有问题则用收盘价代替

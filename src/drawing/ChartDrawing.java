@@ -115,7 +115,7 @@ public class ChartDrawing {
 		final float main_min = (float) main_dss.getMin();
 		final float main_scale = (main_height * 0.99f) / (main_max - main_min);
 		main_image = new BufferedImage(end - start, main_height, BufferedImage.TYPE_INT_RGB);
-		for (int i = start; i < end; i++) {
+		for (int i = start; i < Math.min(end, close.length); i++) {
 			for (int j = (int) ((low[i] - main_min) * main_scale); j < (int) ((high[i] - main_min) * main_scale); j++)
 				main_image.setRGB(i, j, (close[i] > open[i]) ? Color.RED.getRGB() : Color.GREEN.getRGB());
 			for (int j = 0; j < main_buffer_list.size(); j++) {
@@ -143,7 +143,7 @@ public class ChartDrawing {
 		final float separate_scale = (separate_height * 0.99f) / (separate_max - separate_min);
 		separate_image = new BufferedImage(end - start, separate_height, BufferedImage.TYPE_INT_RGB);
 		
-		for (int i = start; i < end; i++) {
+		for (int i = start; i < Math.min(end, close.length); i++) {
 			for (int j = 0; j < separate_buffer_list.size(); j++) {
 				int begin = separate_begin_list.get(j);
 				if (i >= begin)
