@@ -1,7 +1,5 @@
 package data;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
@@ -11,24 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import data.struct.BarSeries;
 
 public abstract class AbstractDataSource implements IDataSource {
-	protected static final Properties configFile;
-	static {
-		configFile = new Properties();
-		try (FileInputStream in = new FileInputStream("config.ini")) {
-			configFile.load(in);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-
 	// 上海期货交易所                                   燃油, 线材
 	protected final static String SQ[] = {"fu", "wr"};
 	// 上海期货交易所 (夜盘)              铜,   铝,   锌,   铅,   镍,   锡,   金,   银,螺纹钢,热轧卷板,沥青,天然橡胶

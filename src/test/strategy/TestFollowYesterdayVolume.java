@@ -17,6 +17,6 @@ public class TestFollowYesterdayVolume {
 		st.setStrategyParam(FollowYesterdayVolumeStrategy.class);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + FollowYesterdayVolumeStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(FollowYesterdayVolumeStrategy.class.getSimpleName() + ".png");
 	}
 }

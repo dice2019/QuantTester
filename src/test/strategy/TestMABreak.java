@@ -20,6 +20,6 @@ public class TestMABreak {
 		st.setStrategyParam(MABreakStrategy.class, Period, MA.MODE_EMA, APPLIED_PRICE.PRICE_CLOSE);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + MABreakStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(MABreakStrategy.class.getSimpleName() + ".png");
 	}
 }

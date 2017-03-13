@@ -18,6 +18,6 @@ public class TestChannelBreak {
 		st.setStrategyParam(ChannelBreakStrategy.class, channel_period);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + ChannelBreakStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(ChannelBreakStrategy.class.getSimpleName() + ".png");
 	}
 }

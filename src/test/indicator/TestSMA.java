@@ -23,6 +23,6 @@ public final class TestSMA {
 		ema.calculate(Open, High, Low, Close);
 		float[] ema_buffer = ema.getBufferById(0);
 
-		new ChartDrawing().drawBars(ohlcv).drawBufferOnMain(ema_buffer, Period - 1).actualDraw().writeToFile("E:\\sma.png");;
+		new ChartDrawing().drawBars(ohlcv).drawBufferOnMain(ema_buffer, Period - 1).actualDraw().writeToFile("sma.png");;
 	}
 }

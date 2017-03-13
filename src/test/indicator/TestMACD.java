@@ -24,6 +24,6 @@ public final class TestMACD {
 		float[] macd_signal_buffer = macd.getBufferById(1);
 
 		new ChartDrawing().drawBars(ohlcv).drawBufferOnSeparate(macd_main_buffer, 0)
-		.drawBufferOnSeparate(macd_signal_buffer, 0).actualDraw().writeToFile("E:\\macd.png");;
+		.drawBufferOnSeparate(macd_signal_buffer, 0).actualDraw().writeToFile("macd.png");;
 	}
 }

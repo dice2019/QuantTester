@@ -17,6 +17,6 @@ public class TestFollowYesterday {
 		st.setStrategyParam(FollowYesterdayStrategy.class, 3, false);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + FollowYesterdayStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(FollowYesterdayStrategy.class.getSimpleName() + ".png");
 	}
 }

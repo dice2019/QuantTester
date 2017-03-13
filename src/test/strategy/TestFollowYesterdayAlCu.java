@@ -53,6 +53,6 @@ public class TestFollowYesterdayAlCu {
 		
 		System.out.println(balance[balance.length - 1]);
 		
-		new ResultDrawing().drawScatterDiagram("E:\\" + strategy.getClass().getSimpleName() + ".png", balance);
+		new ResultDrawing().drawScatterDiagram(strategy.getClass().getSimpleName() + ".png", balance);
 	}
 }

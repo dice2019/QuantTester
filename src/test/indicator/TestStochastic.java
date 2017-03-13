@@ -24,6 +24,6 @@ public final class TestStochastic {
 		float[] stochastic_signal_buffer = stochastic.getBufferById(1);
 
 		new ChartDrawing().drawBars(ohlcv).drawBufferOnSeparate(stochastic_main_buffer, 0)
-		.drawBufferOnSeparate(stochastic_signal_buffer, 0).actualDraw().writeToFile("E:\\stochastic.png");;
+		.drawBufferOnSeparate(stochastic_signal_buffer, 0).actualDraw().writeToFile("stochastic.png");;
 	}
 }

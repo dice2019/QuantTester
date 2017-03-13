@@ -17,6 +17,6 @@ public class TestBuyAndHold {
 		st.setStrategyParam(BuyAndHoldStrategy.class);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + BuyAndHoldStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(BuyAndHoldStrategy.class.getSimpleName() + ".png");
 	}
 }

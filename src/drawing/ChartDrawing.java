@@ -15,6 +15,7 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 
 import data.struct.BarSeries;
+import global.Config;
 import helper.ImageHelper;
 import helper.StreamHelper;
 
@@ -164,8 +165,10 @@ public class ChartDrawing {
 		} else {
 			merged = ImageHelper.mergeImage(separate_image, main_image, false);
 		}
+
+		String filename_with_path = Config.ResultDir + filename;
 		try {
-			ImageIO.write(ImageHelper.flipImage(merged), "png", new File(filename));
+			ImageIO.write(ImageHelper.flipImage(merged), "png", new File(filename_with_path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

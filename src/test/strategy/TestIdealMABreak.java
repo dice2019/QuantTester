@@ -20,6 +20,6 @@ public class TestIdealMABreak {
 		st.setStrategyParam(IdealMABreakStrategy.class, Period, MA.MODE_SMMA, APPLIED_PRICE.PRICE_TYPICAL);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + IdealMABreakStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(IdealMABreakStrategy.class.getSimpleName() + ".png");
 	}
 }

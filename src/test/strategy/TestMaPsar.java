@@ -20,6 +20,6 @@ public class TestMaPsar {
 		st.setStrategyParam(MaPsarStrategy.class, Period, MA.MODE_EMA, APPLIED_PRICE.PRICE_TYPICAL, 0.02f, 0.18f);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + MaPsarStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(MaPsarStrategy.class.getSimpleName() + ".png");
 	}
 }

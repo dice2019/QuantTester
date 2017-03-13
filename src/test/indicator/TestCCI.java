@@ -23,6 +23,6 @@ public final class TestCCI {
 		cci.calculate(Open, High, Low, Close);
 		float[] cci_buffer = cci.getBufferById(0);
 
-		new ChartDrawing().drawBars(ohlcv).drawBufferOnSeparate(cci_buffer, 0).actualDraw().writeToFile("E:\\cci.png");;
+		new ChartDrawing().drawBars(ohlcv).drawBufferOnSeparate(cci_buffer, 0).actualDraw().writeToFile("cci.png");;
 	}
 }

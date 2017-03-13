@@ -22,6 +22,6 @@ public final class TestEMA {
 		ema.calculate(Open, High, Low, Close);
 		float[] ema_buffer = ema.getBufferById(0);
 
-		new ChartDrawing().drawBars(ohlcv).drawBufferOnMain(ema_buffer, 0).actualDraw().writeToFile("E:\\ema.png");;
+		new ChartDrawing().drawBars(ohlcv).drawBufferOnMain(ema_buffer, 0).actualDraw().writeToFile("ema.png");;
 	}
 }

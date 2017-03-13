@@ -22,6 +22,6 @@ public final class TestPSAR {
 		psar.calculate(Open, High, Low, Close);
 		float[] psar_buffer = psar.getBufferById(0);
 
-		new ChartDrawing().drawBars(ohlcv).drawBufferOnMain(psar_buffer, 0).actualDraw().writeToFile("E:\\psar.png");;
+		new ChartDrawing().drawBars(ohlcv).drawBufferOnMain(psar_buffer, 0).actualDraw().writeToFile("psar.png");;
 	}
 }

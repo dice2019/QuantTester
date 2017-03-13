@@ -17,6 +17,6 @@ public class TestFollowFirstKLine {
 		st.setStrategyParam(FollowFirstKLineStrategy.class);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + FollowFirstKLineStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(FollowFirstKLineStrategy.class.getSimpleName() + ".png");
 	}
 }

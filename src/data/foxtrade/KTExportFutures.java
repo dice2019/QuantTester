@@ -1,5 +1,6 @@
 package data.foxtrade;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import data.struct.Bar;
 import data.struct.FutureBar;
 import data.struct.FutureBarSeries;
 import data.struct.Tick;
+import global.Config;
 
 @SuppressWarnings("unchecked")
 public class KTExportFutures extends AbstractKTExport implements ITickDataSource {
@@ -104,7 +106,7 @@ public class KTExportFutures extends AbstractKTExport implements ITickDataSource
 	}
 
 	protected void KTExport_3p(String instrument_name, int month, TIME_FRAME time_frame) {
-		String file_path = configFile.get("KTExportDir") + time_frame.name() + "\\" + instrument_name + ContractNum[month] + getSuffix(instrument_name);
+		String file_path = Config.KTExportDir + time_frame.name() + File.separator + instrument_name + ContractNum[month] + getSuffix(instrument_name);
 		String[] input_files = null;
 
 		if (time_frame == TIME_FRAME.TICK) {

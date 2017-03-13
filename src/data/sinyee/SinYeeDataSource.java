@@ -22,6 +22,7 @@ import data.TIME_FRAME;
 import data.struct.FutureBar;
 import data.struct.FutureBarSeries;
 import data.struct.Tick;
+import global.Config;
 import data.struct.DetailedTick;
 import helper.MathHelper;
 
@@ -115,7 +116,7 @@ public class SinYeeDataSource extends AbstractDataSource implements ITickDataSou
 		Integer[] idarray = id_list.toArray(new Integer[0]);
 		Arrays.sort(idarray);
 		
-		String folder = configFile.get("SinYeeDataDir") + getPrefix(instrument_name) + instrument_name;
+		String folder = Config.SinYeeDataDir + getPrefix(instrument_name) + instrument_name;
 		List<Path> pathlist = listSourceFiles(Paths.get(folder), "*.bar");
 		
 		Map<String, List<FutureBar>[]> contract_data_map = new HashMap<>();
@@ -216,7 +217,7 @@ public class SinYeeDataSource extends AbstractDataSource implements ITickDataSou
 	}
 	
 	private void loadTicks(String instrument_name, Predicate<String> contract_filter) {
-		String folder = configFile.get("SinYeeDataDir") + getPrefix(instrument_name) + instrument_name;
+		String folder = Config.SinYeeDataDir + getPrefix(instrument_name) + instrument_name;
 		List<Path> pathlist = listSourceFiles(Paths.get(folder), "*.tick");
 
 		all_tick_list = new ArrayList<>();

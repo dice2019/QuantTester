@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import global.Config;
 import helper.ImageHelper;
 import helper.MathHelper;
 
@@ -41,8 +42,10 @@ public class ResultDrawing {
 			bi.setRGB(i, (int) (((balance[i]) - min_balance) * scale), foreground_color.getRGB());
 //			bi.setRGB(i, (int) ((Math.log10(balance[i]) - min_balance_log_floor) * scale), foreground_color.getRGB());
 		}
+
+		String filename_with_path = Config.ResultDir + filename;
 		try {
-			ImageIO.write(ImageHelper.flipImage(bi), "png", new File(filename));
+			ImageIO.write(ImageHelper.flipImage(bi), "png", new File(filename_with_path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

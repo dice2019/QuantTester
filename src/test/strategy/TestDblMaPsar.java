@@ -19,6 +19,6 @@ public class TestDblMaPsar {
 		st.setStrategyParam(DblMaPsarStrategy.class, 3, 16, MA.MODE_EMA, APPLIED_PRICE.PRICE_TYPICAL, 0.02f, 0.18f);
 		st.evaluate();
 		st.getPerformances().printAll();
-		st.drawDailyBalance("E:\\" + DblMaPsarStrategy.class.getSimpleName() + ".png");
+		st.drawDailyBalance(DblMaPsarStrategy.class.getSimpleName() + ".png");
 	}
 }
