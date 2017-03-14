@@ -1,5 +1,6 @@
 package global;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +13,14 @@ public final class Config {
 	public static final String SinYeeDataDir;
 	public static final String ResultDir;
 	public static final int UseThreads;
+
+	private static String addSeparatorIfNecessary(String path) {
+		if (path.endsWith(File.separator)) {
+			return path;
+		} else {
+			return path + File.separator;
+		}
+	}
 
 	static {
 		configFile = new Properties();
@@ -33,10 +42,9 @@ public final class Config {
 			e.printStackTrace();
 		}
 
-		// TODO Add File.separator if necessary
-		KTExportDir = KTExportDir_tmp;
-		SinYeeDataDir = SinYeeDataDir_tmp;
-		ResultDir = ResultDir_tmp;
+		KTExportDir = addSeparatorIfNecessary(KTExportDir_tmp);
+		SinYeeDataDir = addSeparatorIfNecessary(SinYeeDataDir_tmp);
+		ResultDir = addSeparatorIfNecessary(ResultDir_tmp);
 
 		int num = 1;
 		boolean invalid_num = false;

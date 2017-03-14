@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import data.ITickDataSource;
 import data.TIME_FRAME;
 import data.foxtrade.KTExportFutures;
+import global.Config;
 import helper.ImageHelper;
 import helper.ReflectHelper;
 import performance.DailyPerformances;
@@ -52,7 +53,7 @@ public class TestTickBar2 {
 		}
 		result_set_index = 0;
 		completed_threads = 0;
-		final int thread_num = 4;
+		final int thread_num = Config.UseThreads;
 		for (int i = 0; i < thread_num; i++) {
 			new Thread(() -> EvaluateStrategyThread()).start();
 		}
@@ -146,7 +147,7 @@ public class TestTickBar2 {
 		}
 
 		try {
-			ImageIO.write(ImageHelper.flipImage(bi), "png", new File("E:\\tickbar.png"));
+			ImageIO.write(ImageHelper.flipImage(bi), "png", new File(Config.ResultDir + "tickbar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -165,7 +166,7 @@ public class TestTickBar2 {
 		}
 		
 		try {
-			ImageIO.write(ImageHelper.flipImage(bi), "png", new File("E:\\single_time.png"));
+			ImageIO.write(ImageHelper.flipImage(bi), "png", new File(Config.ResultDir + "single_time.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

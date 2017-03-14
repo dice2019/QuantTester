@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 
 import data.ITickDataSource;
 import data.TIME_FRAME;
+import global.Config;
 import helper.ImageHelper;
 import performance.DailyPerformances;
 import performance.Performances;
@@ -52,7 +53,7 @@ public class TestTickBar {
 		}
 		result_set_index = 0;
 		completed_threads = 0;
-		final int thread_num = 4;
+		final int thread_num = Config.UseThreads;
 		for (int i = 0; i < thread_num; i++) {
 			new Thread(() -> EvaluateStrategyThread()).start();
 		}
@@ -132,7 +133,7 @@ public class TestTickBar {
 		}
 
 		try {
-			ImageIO.write(ImageHelper.flipImage(bi), "png", new File("E:\\tickbar.png"));
+			ImageIO.write(ImageHelper.flipImage(bi), "png", new File(Config.ResultDir + "tickbar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
