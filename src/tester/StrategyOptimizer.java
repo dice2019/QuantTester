@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import data.TIME_FRAME;
+import global.Config;
 import performance.Performances;
 import strategy.Portfolio;
 import strategy.template.BarBasedStrategy;
@@ -33,7 +34,7 @@ public class StrategyOptimizer implements Runnable {
 	}
 
 	public StrategyOptimizer(Class<? extends AbstractStrategyTester> astcls) {
-		this(astcls, 4);
+		this(astcls, Config.UseThreads);
 	}
 
 	public void setInstrumentParam(String instrument, TIME_FRAME time_frame, float init_cash, float commission_ratio) {

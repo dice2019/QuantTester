@@ -22,9 +22,11 @@ public class AbstractKTExport extends AbstractDataSource {
 			in.readInt();	// Export time
 			int unit_size = in.readInt();
 			int num = in.readInt();
-			bars = new ArrayList<>(num);
-			while (in.available() >= unit_size) {
-				bars.add(in.readSTKData());
+			if (unit_size == 32 && num > 0) {
+				bars = new ArrayList<>(num);
+				while (in.available() >= unit_size) {
+					bars.add(in.readSTKData());
+				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Should print debug log
@@ -42,9 +44,11 @@ public class AbstractKTExport extends AbstractDataSource {
 			in.readInt();	// Export time
 			int unit_size = in.readInt();
 			int num = in.readInt();
-			bars = new ArrayList<>(num);
-			while (in.available() >= unit_size) {
-				bars.add(in.readSTKDataEx(unit_size));
+			if (unit_size == 40 && num > 0) {
+				bars = new ArrayList<>(num);
+				while (in.available() >= unit_size) {
+					bars.add(in.readSTKDataEx(unit_size));
+				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Should print debug log
