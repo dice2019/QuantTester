@@ -1,6 +1,12 @@
 package strategy;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Portfolio {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
 	// http://www.shfe.com.cn/bourseService/activity/basics/211231978.html
 	
 	public float margin = 0.0f;
@@ -56,13 +62,6 @@ public class Portfolio {
 		this.short_volume = 0.0f;
 	}
 
-	public static boolean g_print_trade_log = false;
-	
-	public static final void printlog(String log) {	// FIXME
-		if (g_print_trade_log)
-			System.out.println(log);
-	}
-	
 	public boolean openLong(float price, float volume) {
 		// TODO 检查保证金
 		if (margin > 100.0f) {
@@ -70,7 +69,7 @@ public class Portfolio {
 			long_volume = volume;
 			cost(price * volume);
 			long_trades ++;
-			printlog("OpenLong:   price = " + price + ", volume = " + volume);
+			logger.info("OpenLong:   price = {}, volume = {}", price, volume);
 			return true;
 		} else {
 			return false;
@@ -84,7 +83,7 @@ public class Portfolio {
 			short_volume = volume;
 			cost(price * volume);
 			short_trades ++;
-			printlog("OpenShort:  price = " + price + ", volume = " + volume);
+			logger.info("OpenShort:  price = {}, volume = {}", price, volume);
 			return true;
 		} else {
 			return false;
@@ -101,7 +100,7 @@ public class Portfolio {
 				long_open_price = 0.0f;
 			}
 			cost(price * volume);
-			printlog("CloseLong:  price = " + price + ", volume = " + volume + ", long_profit  = " + long_profit);
+			logger.info("CloseLong:  price = {}, volume = {}, long_profit  = {}", price, volume, long_profit);
 			return true;
 		} else {
 			return false;
@@ -118,7 +117,7 @@ public class Portfolio {
 				short_open_price = 0.0f;
 			}
 			cost(price * volume);
-			printlog("CloseShort: price = " + price + ", volume = " + volume + ", short_profit = " + short_profit);
+			logger.info("CloseShort: price = {}, volume = {}, short_profit = ", price, volume, short_profit);
 			return true;
 		} else {
 			return false;

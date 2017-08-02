@@ -6,7 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public final class Config {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
 	private static final Properties configFile;
 
 	public static final String KTExportDir;
@@ -54,7 +60,7 @@ public final class Config {
 			invalid_num = true;
 		}
 		if (invalid_num || num < 1) {
-			System.out.println("Invalid \"UseThreads\" value, will use 1 thread.");
+			logger.warn("Invalid \"UseThreads\" value, will use 1 thread.");
 			num = 1;
 		}
 		UseThreads = num;

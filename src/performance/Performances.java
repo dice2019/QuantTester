@@ -56,8 +56,9 @@ public abstract class Performances implements Serializable {	// TODO ”√–Ú¡–ªØ±£¥
 		}
 	}
 
-	public void printAll() {
+	public String toString() {
 		Field[] performance_fields = this.getClass().getFields();
+		StringBuilder result = new StringBuilder();
 		for (Field performance_field : performance_fields) {
 			String field_name = performance_field.getName();
 			Object field_value = null;
@@ -66,7 +67,8 @@ public abstract class Performances implements Serializable {	// TODO ”√–Ú¡–ªØ±£¥
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
-			System.out.println(field_name + ":\t" + field_value);
+			result.append(field_name + ":\t" + field_value + System.getProperty("line.separator"));
 		}
+		return result.toString();
 	}
 }

@@ -2,6 +2,9 @@ package test.strategy;
 
 import java.time.LocalDateTime;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.TIME_FRAME;
 import helper.DateTimeHelper;
 import indicator.APPLIED_PRICE;
@@ -11,6 +14,8 @@ import tester.AbstractStrategyTester;
 
 public class TestMaPsar {
 
+	private static final Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
 		Integer Period = 16;
 		AbstractStrategyTester st = new tester.RealStrategyTester("m", TIME_FRAME.DAY);
@@ -19,7 +24,7 @@ public class TestMaPsar {
 		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
 		st.setStrategyParam(MaPsarStrategy.class, Period, MA.MODE_EMA, APPLIED_PRICE.PRICE_TYPICAL, 0.02f, 0.18f);
 		st.evaluate();
-		st.getPerformances().printAll();
+		logger.info(st.getPerformances());
 		st.drawDailyBalance(MaPsarStrategy.class.getSimpleName() + ".png");
 	}
 }

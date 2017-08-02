@@ -2,6 +2,9 @@ package test.strategy;
 
 import java.time.LocalDateTime;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.TIME_FRAME;
 import helper.DateTimeHelper;
 import strategy.ChannelBreakStrategy;
@@ -9,6 +12,8 @@ import tester.AbstractStrategyTester;
 
 public class TestChannelBreak {
 
+	private static final Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
 		Integer channel_period = 58;
 		AbstractStrategyTester st = new tester.SimpleStrategyTester("cu", TIME_FRAME.DAY);
@@ -17,7 +22,7 @@ public class TestChannelBreak {
 		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
 		st.setStrategyParam(ChannelBreakStrategy.class, channel_period);
 		st.evaluate();
-		st.getPerformances().printAll();
+		logger.info(st.getPerformances());
 		st.drawDailyBalance(ChannelBreakStrategy.class.getSimpleName() + ".png");
 	}
 }

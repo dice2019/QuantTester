@@ -2,6 +2,9 @@ package test.strategy;
 
 import java.time.LocalDateTime;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.TIME_FRAME;
 import helper.DateTimeHelper;
 import indicator.APPLIED_PRICE;
@@ -11,6 +14,8 @@ import tester.AbstractStrategyTester;
 
 public class TestIdealMABreak {
 
+	private static final Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
 		Integer Period = 345;
 		AbstractStrategyTester st = new tester.SimpleStrategyTester("al", TIME_FRAME.MIN15, 100_0000.0f, 0.03f);
@@ -19,7 +24,7 @@ public class TestIdealMABreak {
 		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
 		st.setStrategyParam(IdealMABreakStrategy.class, Period, MA.MODE_SMMA, APPLIED_PRICE.PRICE_TYPICAL);
 		st.evaluate();
-		st.getPerformances().printAll();
+		logger.info(st.getPerformances());
 		st.drawDailyBalance(IdealMABreakStrategy.class.getSimpleName() + ".png");
 	}
 }

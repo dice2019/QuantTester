@@ -1,5 +1,8 @@
 package tester;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.TIME_FRAME;
 import data.foxtrade.KTExportFutures;
 import helper.DateTimeHelper;
@@ -9,6 +12,8 @@ import trade.ITradeable;
 import trade.IdealTrader;
 
 public class SimpleStrategyTester extends AbstractStrategyTester {
+	
+	private static final Logger logger = LogManager.getLogger();
 
 	private BarBasedStrategy strategy = null;
 	
@@ -35,7 +40,7 @@ public class SimpleStrategyTester extends AbstractStrategyTester {
 		float[] daily_balance = new float[end_index - start_index + 1];
 		strategy.setIndexByTime(adjusted_daily_open_time[start_index]);
 		for (int i = start_index; i <= end_index; i++) {
-			Portfolio.printlog(DateTimeHelper.Long2Ldt(adjusted_daily_close_time[i]).toString());
+			logger.info(DateTimeHelper.Long2Ldt(adjusted_daily_close_time[i]));
 			strategy.calcUntil(ideal_trader, adjusted_daily_close_time[i]);
 			daily_balance[i - start_index] = portfolio.getBalance(settle_price[i]);
 		}

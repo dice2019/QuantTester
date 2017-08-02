@@ -3,7 +3,13 @@ package data.struct;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public final class FutureBarSeries extends BarSeries implements Iterable<Bar> {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
 	public float openInterests[];
 	public int   contractMonths[];
 	public float settlements[];
@@ -50,8 +56,7 @@ public final class FutureBarSeries extends BarSeries implements Iterable<Bar> {
 		if (settlements != null) {
 			for (int j = 0; j < times.length; j++) {
 				if (settlements[j] < lows[j] || settlements[j] > highs[j]) {
-					// TODO use log4j
-					System.out.println("Fixed settlement price! j = " + j);
+					logger.warn("Fixed settlement price! j = {}", j);
 					settlements[j] = closes[j] + 0.003f;	// 加上 0.003f 作为标记
 				}
 			}

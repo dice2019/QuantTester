@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.TIME_FRAME;
 import data.collector.LiquidityCollector;
 import data.sinyee.SinYeeDataSource;
@@ -18,6 +21,8 @@ import strategy.Portfolio;
 import trade.ControlledTrader;
 
 public class LimitStrategyTester extends RealStrategyTester {
+	
+	private static final Logger logger = LogManager.getLogger();
 	
 	public static int adjust_sinyee_time(final int time) {
 		LocalDateTime ldt = DateTimeHelper.Long2Ldt(time);
@@ -86,7 +91,7 @@ public class LimitStrategyTester extends RealStrategyTester {
 		float[] daily_balance = new float[end_index - start_index + 1];
 		int force_switch_counter = 0;
 		for (int i = start_index; i <= end_index; i++) {
-			Portfolio.printlog(DateTimeHelper.Long2Ldt(adjusted_daily_close_time[i]).toString());
+			logger.info(DateTimeHelper.Long2Ldt(adjusted_daily_close_time[i]));
 			int main_month_id = daily_main_id[i];
 			if (current_trading_month_id != main_month_id) {
 				if (portfolio.hasNoPosition()) {
@@ -114,8 +119,7 @@ public class LimitStrategyTester extends RealStrategyTester {
 				} else {
 					controlled_trader.allow_sell = false;
 					controlled_trader.allow_buy  = false;
-					// TODO should print log
-					System.out.println("not found liquidity data: " + DateTimeHelper.Long2Ldt(current_trading_month_time));
+					logger.warn("Can not found liquidity data: {}", DateTimeHelper.Long2Ldt(current_trading_month_time));
 				}
 				if (strategies[current_trading_month_id]
 						.calcNextBar(controlled_trader) > adjusted_daily_close_time[i]) {

@@ -155,7 +155,7 @@ public class TestTickBar2 {
 
 	private static void OutputResult(ParamSet ps) {
 		System.out.println("Ticks = " + String.format("%3d", ps.TickNum) + ", Bars = " + ps.BarNum);
-		ps.result.printAll();
+		System.out.println(ps.result);
 
 		BufferedImage bi = new BufferedImage(ps.result.Total_Days, 1000, BufferedImage.TYPE_INT_RGB);
 

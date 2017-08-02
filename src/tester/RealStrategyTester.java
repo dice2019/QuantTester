@@ -2,6 +2,9 @@ package tester;
 
 import java.util.EnumSet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.TIME_FRAME;
 import data.foxtrade.KTExportFutures;
 import data.struct.BarSeries;
@@ -12,6 +15,8 @@ import strategy.template.BarBasedStrategy;
 import trade.ControlledTrader;
 
 public class RealStrategyTester extends AbstractStrategyTester {
+
+	private static final Logger logger = LogManager.getLogger();
 
 	protected BarBasedStrategy[] strategies = null;
 	protected FutureBarSeries[] daily_barseries = new FutureBarSeries[12]; 
@@ -83,7 +88,7 @@ public class RealStrategyTester extends AbstractStrategyTester {
 				// FIXME 由于数据质量问题, 找不到这一天的数据, 只能沿用前一天的主力合约
 				// STKDATA中包含的合约月份信息也不全
 				assert false : "找不到这一天的数据: " + DateTimeHelper.Long2Ldt(main_daily_barseries.times[i]);
-				System.out.println("找不到这一天的数据: " + DateTimeHelper.Long2Ldt(main_daily_barseries.times[i]));
+				logger.warn("找不到这一天的数据: " + DateTimeHelper.Long2Ldt(main_daily_barseries.times[i]));
 				if (i > 0)
 					daily_main_id[i] = daily_main_id[i - 1];
 			}
@@ -98,7 +103,7 @@ public class RealStrategyTester extends AbstractStrategyTester {
 		float[] daily_balance = new float[end_index - start_index + 1];
 		int force_switch_counter = 0;
 		for (int i = start_index; i <= end_index; i++) {
-			Portfolio.printlog(DateTimeHelper.Long2Ldt(adjusted_daily_close_time[i]).toString());
+			logger.info(DateTimeHelper.Long2Ldt(adjusted_daily_close_time[i]));
 			int main_month_id = daily_main_id[i];
 			if (current_trading_month_id != main_month_id) {
 				if (portfolio.hasNoPosition()) {

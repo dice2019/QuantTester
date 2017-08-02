@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import data.AbstractDataSource;
 import data.TIME_FRAME;
 import data.struct.Bar;
 import data.struct.FutureBar;
 
 public class AbstractKTExport extends AbstractDataSource {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
 	protected static final EnumSet<TIME_FRAME> KT_TIME_FRAMES = EnumSet.complementOf(EnumSet.of(TIME_FRAME.MIN3, TIME_FRAME.MIN10));
 
 	protected static List<Bar> ReadSTKData(String single_file) {
@@ -29,7 +35,7 @@ public class AbstractKTExport extends AbstractDataSource {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Should print debug log
+			logger.warn("Can not find file {}", single_file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,8 +57,7 @@ public class AbstractKTExport extends AbstractDataSource {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Should print debug log
-			// http://logging.apache.org/log4j/2.x/index.html
+			logger.warn("Can not find file {}", single_file);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

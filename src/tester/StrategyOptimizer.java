@@ -12,7 +12,6 @@ import java.util.Map;
 import data.TIME_FRAME;
 import global.Config;
 import performance.Performances;
-import strategy.Portfolio;
 import strategy.template.BarBasedStrategy;
 
 // TODO 用Fork/Join　重写
@@ -30,7 +29,6 @@ public class StrategyOptimizer implements Runnable {
 		this.astcls = astcls;
 		this.thread_num = thread_num;
 		this.astList = new AbstractStrategyTester[this.thread_num];
-		Portfolio.g_print_trade_log = false;	// FIXME 使用log4j
 	}
 
 	public StrategyOptimizer(Class<? extends AbstractStrategyTester> astcls) {
