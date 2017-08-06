@@ -1,7 +1,5 @@
 package test.strategy;
 
-import java.time.LocalDateTime;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +8,8 @@ import helper.DateTimeHelper;
 import indicator.APPLIED_PRICE;
 import indicator.MA;
 import strategy.MaPsarStrategy;
+import test.CommonParam;
+import test.ParamManager;
 import tester.AbstractStrategyTester;
 
 public class TestMaPsar {
@@ -17,13 +17,14 @@ public class TestMaPsar {
 	private static final Logger logger = LogManager.getLogger();
 	
 	public static void main(String[] args) {
-		Integer Period = 16;
-		AbstractStrategyTester st = new tester.RealStrategyTester("m", TIME_FRAME.DAY);
-		LocalDateTime start_date = LocalDateTime.of(2008, 1, 1,  0, 0, 0);
-		LocalDateTime   end_date = LocalDateTime.of(2016, 1, 1, 17, 0, 0);
-		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
-		st.setStrategyParam(MaPsarStrategy.class, Period, MA.MODE_EMA, APPLIED_PRICE.PRICE_TYPICAL, 0.02f, 0.18f);
+		final CommonParam cp = ParamManager.getCommonParam("m", TIME_FRAME.DAY, "20080101 000000", "20160101 170000");
+		final Object[] pp = ParamManager.getParticularParam(MaPsarStrategy.class, 16, MA.MODE_EMA, APPLIED_PRICE.PRICE_TYPICAL, 0.02f, 0.18f);
+		
+		AbstractStrategyTester st = new tester.RealStrategyTester(cp.instrument, cp.tf);
+		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(cp.start_date), (int) DateTimeHelper.Ldt2Long(cp.end_date));
+		st.setStrategyParam(MaPsarStrategy.class, pp);
 		st.evaluate();
+		
 		logger.info(st.getPerformances());
 		st.drawDailyBalance(MaPsarStrategy.class.getSimpleName() + ".png");
 	}

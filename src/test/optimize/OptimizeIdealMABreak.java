@@ -1,7 +1,12 @@
 package test.optimize;
 
-import java.time.LocalDateTime;
 import java.util.Map.Entry;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+
 import java.util.Set;
 
 import data.TIME_FRAME;
@@ -10,16 +15,23 @@ import indicator.APPLIED_PRICE;
 import indicator.MA;
 import performance.Performances;
 import strategy.IdealMABreakStrategy;
+import test.CommonParam;
+import test.ParamManager;
 import tester.StrategyOptimizer;
 
 public final class OptimizeIdealMABreak {
 
 	public static void main(String[] args) {
+		final LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+		final Configuration config = ctx.getConfiguration();
+		config.getLoggerConfig(strategy.Portfolio.class.getName()).setLevel(Level.WARN);
+		ctx.updateLoggers(config);
+		
+		final CommonParam cp = ParamManager.getCommonParam("al", TIME_FRAME.MIN15, "20100101 000000", "20160101 170000");
+		
 		StrategyOptimizer so = new StrategyOptimizer(tester.RealStrategyTester.class);
-		so.setInstrumentParam("al", TIME_FRAME.MIN15, 100_0000.0f, 0.03f);
-		LocalDateTime start_date = LocalDateTime.of(2010, 1, 1,  0, 0, 0);
-		LocalDateTime   end_date = LocalDateTime.of(2016, 1, 1, 17, 0, 0);
-		so.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
+		so.setInstrumentParam(cp.instrument, cp.tf, 100_0000.0f, 0.03f);
+		so.setTestDateRange((int) DateTimeHelper.Ldt2Long(cp.start_date), (int) DateTimeHelper.Ldt2Long(cp.end_date));
 		int num = so.setStrategyParamRange(IdealMABreakStrategy.class, new Integer[]{30, 400, 2}, MA.MA_MODES, new APPLIED_PRICE[]{APPLIED_PRICE.PRICE_TYPICAL, APPLIED_PRICE.PRICE_CLOSE});
 		System.out.println(num);
 		so.StartOptimization();

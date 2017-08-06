@@ -1,7 +1,5 @@
 package test.strategy;
 
-import java.time.LocalDateTime;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +8,8 @@ import helper.DateTimeHelper;
 import indicator.APPLIED_PRICE;
 import indicator.MA;
 import strategy.IdealMABreakStrategy;
+import test.CommonParam;
+import test.ParamManager;
 import tester.AbstractStrategyTester;
 
 public class TestIdealMABreak {
@@ -17,13 +17,14 @@ public class TestIdealMABreak {
 	private static final Logger logger = LogManager.getLogger();
 	
 	public static void main(String[] args) {
-		Integer Period = 345;
-		AbstractStrategyTester st = new tester.SimpleStrategyTester("al", TIME_FRAME.MIN15, 100_0000.0f, 0.03f);
-		LocalDateTime start_date = LocalDateTime.of(2010, 1, 1,  0, 0, 0);
-		LocalDateTime   end_date = LocalDateTime.of(2016, 1, 1, 17, 0, 0);
-		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
-		st.setStrategyParam(IdealMABreakStrategy.class, Period, MA.MODE_SMMA, APPLIED_PRICE.PRICE_TYPICAL);
+		CommonParam cp = ParamManager.getCommonParam("al", TIME_FRAME.MIN15, "20100101 000000", "20160101 170000");
+		Object[] pp = ParamManager.getParticularParam(IdealMABreakStrategy.class, 345, MA.MODE_SMMA, APPLIED_PRICE.PRICE_TYPICAL);
+		
+		AbstractStrategyTester st = new tester.SimpleStrategyTester(cp.instrument, cp.tf, 100_0000.0f, 0.03f);
+		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(cp.start_date), (int) DateTimeHelper.Ldt2Long(cp.end_date));
+		st.setStrategyParam(IdealMABreakStrategy.class, pp);
 		st.evaluate();
+		
 		logger.info(st.getPerformances());
 		st.drawDailyBalance(IdealMABreakStrategy.class.getSimpleName() + ".png");
 	}

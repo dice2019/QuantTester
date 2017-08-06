@@ -1,13 +1,13 @@
 package test.strategy;
 
-import java.time.LocalDateTime;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import data.TIME_FRAME;
 import helper.DateTimeHelper;
 import strategy.BuyAndHoldStrategy;
+import test.CommonParam;
+import test.ParamManager;
 import tester.AbstractStrategyTester;
 
 public class TestBuyAndHold {
@@ -15,12 +15,13 @@ public class TestBuyAndHold {
 	private static final Logger logger = LogManager.getLogger();
 	
 	public static void main(String[] args) {
-		AbstractStrategyTester st = new tester.RealStrategyTester("cu", TIME_FRAME.DAY);
-		LocalDateTime start_date = LocalDateTime.of(1998, 1,  1,  0, 0, 0);
-		LocalDateTime   end_date = LocalDateTime.of(2016, 9, 16, 17, 0, 0);
-		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
+		final CommonParam cp = ParamManager.getCommonParam("cu", TIME_FRAME.DAY, "19980101 000000", "20160916 170000");
+		
+		AbstractStrategyTester st = new tester.RealStrategyTester(cp.instrument, cp.tf);
+		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(cp.start_date), (int) DateTimeHelper.Ldt2Long(cp.end_date));
 		st.setStrategyParam(BuyAndHoldStrategy.class);
 		st.evaluate();
+		
 		logger.info(st.getPerformances());
 		st.drawDailyBalance(BuyAndHoldStrategy.class.getSimpleName() + ".png");
 	}

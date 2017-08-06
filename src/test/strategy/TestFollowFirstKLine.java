@@ -1,13 +1,13 @@
 package test.strategy;
 
-import java.time.LocalDateTime;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import data.TIME_FRAME;
 import helper.DateTimeHelper;
 import strategy.FollowFirstKLineStrategy;
+import test.CommonParam;
+import test.ParamManager;
 import tester.AbstractStrategyTester;
 
 public class TestFollowFirstKLine {
@@ -15,12 +15,13 @@ public class TestFollowFirstKLine {
 	private static final Logger logger = LogManager.getLogger();
 	
 	public static void main(String[] args) {
-		AbstractStrategyTester st = new tester.SimpleStrategyTester("v", TIME_FRAME.MIN15);
-		LocalDateTime start_date = LocalDateTime.of(2008, 1,  1, 0, 0, 0);
-		LocalDateTime   end_date = LocalDateTime.of(2016, 1, 25, 0, 0, 0);
-		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(start_date), (int) DateTimeHelper.Ldt2Long(end_date));
+		final CommonParam cp = ParamManager.getCommonParam("v", TIME_FRAME.MIN15, "20080101 000000", "20160125 000000");
+
+		AbstractStrategyTester st = new tester.SimpleStrategyTester(cp.instrument, cp.tf);
+		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(cp.start_date), (int) DateTimeHelper.Ldt2Long(cp.end_date));
 		st.setStrategyParam(FollowFirstKLineStrategy.class);
 		st.evaluate();
+		
 		logger.info(st.getPerformances());
 		st.drawDailyBalance(FollowFirstKLineStrategy.class.getSimpleName() + ".png");
 	}
