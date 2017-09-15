@@ -12,10 +12,10 @@ import tester.AbstractStrategyTester;
 
 public class TestBuyAndHold {
 
-	private static final Logger logger = LogManager.getLogger();
+	private static final Logger logger = LogManager.getLogger("TestBuyAndHold");
 	
 	public static void main(String[] args) {
-		final CommonParam cp = ParamManager.getCommonParam("cu", TIME_FRAME.DAY, "19980101 000000", "20160916 170000");
+		final CommonParam cp = ParamManager.getCommonParam("cu", TIME_FRAME.DAY, "19980101 000000", "20170915 170000");
 		
 		AbstractStrategyTester st = new tester.RealStrategyTester(cp.instrument, cp.tf);
 		st.setTestDateRange((int) DateTimeHelper.Ldt2Long(cp.start_date), (int) DateTimeHelper.Ldt2Long(cp.end_date));

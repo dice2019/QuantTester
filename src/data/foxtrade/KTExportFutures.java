@@ -20,8 +20,9 @@ import global.Config;
 @SuppressWarnings("unchecked")
 public class KTExportFutures extends AbstractKTExport implements ITickDataSource {
 	
-	protected static final String[] ContractNum = { "99", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-			"11", "12", "97", "98", "99" };
+	protected static final String[] ContractNum = { 
+			"99", "01", "02", "03", "04", "05", "06", "07", 
+			"08", "09", "10", "11", "12", "97", "98", "99" };
 	{
 		// TODO 只导入交易所的合约数据, 自己计算量指,仓指, 这样就可以删除SuppressWarnings("unchecked")
 		this.multi_time_frame_bars = new Map[ContractNum.length];
